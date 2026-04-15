@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/GetStarted_Scene.unity
+    guid: 6888813f2bd9e4521b9b1343abf0c60f
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    fun.board.input.settings: {fileID: 11400000, guid: d0f3157363e4c4a8797cbb2fbea32371, type: 2}
+    fun.board.settings: {fileID: 11400000, guid: d8bdf435f0bd041baa4baa7a97a8f9e9, type: 2}
