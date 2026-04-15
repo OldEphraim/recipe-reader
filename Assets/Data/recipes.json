@@ -1,0 +1,184 @@
+{
+  "recipes": [
+    {
+      "id": "pancakes",
+      "name": "Fluffy Pancakes",
+      "difficulty": "easy",
+      "steps": [
+        {
+          "index": 0,
+          "text": "Crack the eggs into a big bowl.",
+          "verb": "crack",
+          "correctPiece": 2,
+          "displayText": "Crack the eggs into a big bowl.",
+          "completedText": "Crack the eggs into a big bowl."
+        },
+        {
+          "index": 1,
+          "text": "Stir the flour and milk together.",
+          "verb": "stir",
+          "correctPiece": 0,
+          "displayText": "Stir the flour and milk together.",
+          "completedText": "Stir the flour and milk together."
+        },
+        {
+          "index": 2,
+          "text": "Chop some fresh strawberries.",
+          "verb": "chop",
+          "correctPiece": 3,
+          "displayText": "Chop some fresh strawberries.",
+          "completedText": "Chop some fresh strawberries."
+        },
+        {
+          "index": 3,
+          "text": "Wipe down the countertop before serving.",
+          "verb": "wipe",
+          "correctPiece": 1,
+          "displayText": "Wipe down the countertop before serving.",
+          "completedText": "Wipe down the countertop before serving."
+        }
+      ]
+    },
+    {
+      "id": "pasta_sauce",
+      "name": "Garden Pasta Sauce",
+      "difficulty": "easy",
+      "steps": [
+        {
+          "index": 0,
+          "text": "Dice the tomatoes into small cubes.",
+          "verb": "dice",
+          "correctPiece": 3,
+          "displayText": "Dice the tomatoes into small cubes.",
+          "completedText": "Dice the tomatoes into small cubes."
+        },
+        {
+          "index": 1,
+          "text": "Mix the sauce with a big spoon.",
+          "verb": "mix",
+          "correctPiece": 0,
+          "displayText": "Mix the sauce with a big spoon.",
+          "completedText": "Mix the sauce with a big spoon."
+        },
+        {
+          "index": 2,
+          "text": "Sprinkle some cheese on top.",
+          "verb": "sprinkle",
+          "correctPiece": 2,
+          "displayText": "Sprinkle some cheese on top.",
+          "completedText": "Sprinkle some cheese on top."
+        },
+        {
+          "index": 3,
+          "text": "Rinse the vegetables under cold water.",
+          "verb": "rinse",
+          "correctPiece": 1,
+          "displayText": "Rinse the vegetables under cold water.",
+          "completedText": "Rinse the vegetables under cold water."
+        }
+      ]
+    },
+    {
+      "id": "stir_fry",
+      "name": "Veggie Stir Fry",
+      "difficulty": "medium",
+      "steps": [
+        {
+          "index": 0,
+          "text": "Julienne the carrots into thin matchstick strips.",
+          "verb": "julienne",
+          "correctPiece": 3,
+          "displayText": "Julienne the carrots into thin matchstick strips.",
+          "completedText": "Julienne the carrots into thin matchstick strips."
+        },
+        {
+          "index": 1,
+          "text": "Fold the egg mixture gently into the vegetables.",
+          "verb": "fold",
+          "correctPiece": 0,
+          "displayText": "Fold the egg mixture gently into the vegetables.",
+          "completedText": "Fold the egg mixture gently into the vegetables."
+        },
+        {
+          "index": 2,
+          "text": "Zest a lime over the finished dish for brightness.",
+          "verb": "zest",
+          "correctPiece": 2,
+          "displayText": "Zest a lime over the finished dish for brightness.",
+          "completedText": "Zest a lime over the finished dish for brightness."
+        },
+        {
+          "index": 3,
+          "text": "Scrub the cutting board clean between ingredients.",
+          "verb": "scrub",
+          "correctPiece": 1,
+          "displayText": "Scrub the cutting board clean between ingredients.",
+          "completedText": "Scrub the cutting board clean between ingredients."
+        },
+        {
+          "index": 4,
+          "text": "Ladle the hot sauce into a serving bowl.",
+          "verb": "ladle",
+          "correctPiece": 0,
+          "displayText": "Ladle the hot sauce into a serving bowl.",
+          "completedText": "Ladle the hot sauce into a serving bowl."
+        }
+      ]
+    },
+    {
+      "id": "soup",
+      "name": "Mystery Soup",
+      "difficulty": "hard",
+      "steps": [
+        {
+          "index": 0,
+          "text": "_____ the onion until you have tiny, even pieces.",
+          "verb": "mince",
+          "correctPiece": 3,
+          "displayText": "_____ the onion until you have tiny, even pieces.",
+          "completedText": "Mince the onion until you have tiny, even pieces."
+        },
+        {
+          "index": 1,
+          "text": "_____ the pot slowly so nothing sticks to the bottom.",
+          "verb": "stir",
+          "correctPiece": 0,
+          "displayText": "_____ the pot slowly so nothing sticks to the bottom.",
+          "completedText": "Stir the pot slowly so nothing sticks to the bottom."
+        },
+        {
+          "index": 2,
+          "text": "_____ the peppercorns until they are a fine powder.",
+          "verb": "grind",
+          "correctPiece": 2,
+          "displayText": "_____ the peppercorns until they are a fine powder.",
+          "completedText": "Grind the peppercorns until they are a fine powder."
+        },
+        {
+          "index": 3,
+          "text": "_____ the celery stalks under running water before using them.",
+          "verb": "wash",
+          "correctPiece": 1,
+          "displayText": "_____ the celery stalks under running water before using them.",
+          "completedText": "Wash the celery stalks under running water before using them."
+        },
+        {
+          "index": 4,
+          "text": "_____ the potatoes into quarters before adding to the pot.",
+          "verb": "quarter",
+          "correctPiece": 3,
+          "displayText": "_____ the potatoes into quarters before adding to the pot.",
+          "completedText": "Quarter the potatoes into quarters before adding to the pot."
+        },
+        {
+          "index": 5,
+          "text": "_____ everything together one final time before serving.",
+          "verb": "blend",
+          "correctPiece": 0,
+          "displayText": "_____ everything together one final time before serving.",
+          "completedText": "Blend everything together one final time before serving."
+        }
+      ]
+    }
+  ]
+}
