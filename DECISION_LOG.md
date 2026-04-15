@@ -44,3 +44,30 @@ Record all architectural and design decisions here with timestamp and reasoning.
   - Why `anchoredPosition` rather than `localPosition`: the cards live inside a `VerticalLayoutGroup`, which rewrites `anchoredPosition` each layout pass. We capture the base position in `Awake` (and re-capture lazily if the coroutine fires before Awake finishes) and always restore it at the end, so the shake never desyncs from the layout.
 - **Little Chef gating.** The first step no longer auto-selects — `BeginRecipe` leaves `SelectedStepIndex = -1` (already true) and now also calls `uiManager.ShowLittleChefPrompt()` to display the on-screen message "Place the Little Chef on a step to begin!". A new `firstSelectionMade` bool on `RecipeManager` guards the hide: the prompt goes away the first time `SelectStep` runs successfully and never comes back for the rest of the recipe, even if the Little Chef is lifted and re-placed between steps. Added `littleChefPromptText` (TMP_Text) serialized field + `ShowLittleChefPrompt`/`HideLittleChefPrompt` methods on `UIManager`, and updated `RecipeReaderSceneBuilder` to create the prompt text centered on the gameplay panel so the scene builder still produces a fully wired scene out of the box. Auto-advance after correct answers is unchanged — it was already doing the right thing.
 
+## 2026-04-15 — README + script bug sweep
+- Wrote `README.md` at the project root covering the pitch, how the game teaches reading comprehension, Unity/SDK setup (including the mandatory "disable BoardUIInputModule in the Editor" step), play instructions, the piece-to-verb mapping, CSV log location + format, architecture diagram, and known issues.
+- Audited every script in `Assets/Scripts/` and fixed six real bugs. None of these were blocking in a happy-path playthrough, but each one would have surfaced in playtest logs or hot-reload sessions. **Did not** touch `Assets/Editor/` or the `.unity` scene per instructions.
+
+**Fix 1 — `StepCardUI.WrongFlash` captured the wrong base position.**
+The old code called `CaptureBasePos()` in `Awake`, which runs before the parent `VerticalLayoutGroup` has laid out the card. At that moment `anchoredPosition` is (0,0) (whatever the prefab ships with), so when the shake animation finished and restored `baseAnchoredPos`, it snapped the card to the top of the container instead of wherever the layout group had placed it. Fix: capture `anchoredPosition` at the start of the coroutine — by then the first layout pass has run and the value is correct. Removed the stale `baseAnchoredPos` / `baseAnchoredPosCaptured` fields entirely.
+
+**Fix 2 — `InteractionLogger` leaked a log file on duplicate instances.**
+`Awake` called `OpenFile()` *before* the singleton dedup check, so a second logger instance would open a second CSV on disk and then `Destroy` itself without disposing the `StreamWriter`. Two symptoms in the wild: (a) an empty "ghost" log file appears on every session where a second instance briefly exists (e.g., domain reload in the editor), (b) the file handle leaks until GC runs. Fix: run the `Instance != null` check *first* and early-return before opening any file.
+
+**Fix 3 — `InteractionLogger` logged rotation as a hardcoded 0.**
+`HandlePlaced` / `HandleLifted` / `HandleMoved` passed `0f` for the rotation column of the CSV. The logger has a `PieceHandler` reference right there — it should query the real orientation. Added a small `CurrentRotation(contactId)` helper that calls `pieceHandler.GetOrientationDegrees(contactId)` and pipes it into all three handlers. Now every `placed`/`moved`/`lifted` row in the CSV carries the actual piece rotation, not just the game-logic `correct`/`wrong` rows.
+
+**Fix 4 — `UIManager.WireButtons` stacked duplicate listeners on hot-reload.**
+`AddListener` was called without first clearing existing listeners. In normal play this never fires, but during Editor hot-reload (or if `Start` ever runs twice for any reason) each button would accumulate listeners and multi-fire. Refactored the 8 calls through a tiny `Wire(Button, UnityAction)` helper that runs `onClick.RemoveAllListeners()` before `AddListener`. Also tightens the call site.
+
+**Fix 5 — `RecipeManager.TryPlaceUtensil` had no `isActive` guard.**
+The public method (callable from anywhere, not just from our event routing) did not check `isActive`, so a stray call during the Results screen, or between `EndRecipe` and `BeginRecipe`, could still mutate `CorrectCount` / `WrongAttempts` or call `FlashWrong` on stale cards. Added a single-line early-return at the top that also guards `CurrentRecipe.steps == null`.
+
+**Fix 6 — `RecipeManager.HandlePieceMoved` left a stale highlight when dragged over a completed step.**
+When the Little Chef dragged from step A into an already-completed step B, the old logic called `SelectStep(B)`. `SelectStep` refuses completed indices and early-returns — but the caller had not cleared the previous highlight, so step A stayed visually selected even though the physical chef was no longer there. Fix: in the move handler, detect the completed-target case explicitly and route it through `DeselectStep()` instead.
+
+**Things I looked at and intentionally did not change:**
+- `PieceHandler` allocates a new `HashSet<int>` every `Update` frame. Real but minor GC at 60fps with ≤5 contacts. Not worth the complexity to reuse.
+- `RecipeManager.AutoAdvanceSelection` highlights a step the physical Little Chef is not on. Documented as intentional "next-up hint" in the README's Known Issues.
+- `RecipeData` uses `JsonUtility`, which silently ignores unknown fields and gives no error on malformed JSON. Swapping for a stricter parser would mean a new dependency for a prototype — not justified.
+

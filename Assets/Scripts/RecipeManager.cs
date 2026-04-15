@@ -95,11 +95,16 @@ public class RecipeManager : MonoBehaviour
         if (PieceIdentifier.IsSelector(glyphId) && contactId == littleChefContactId)
         {
             int idx = HitTest(screenPos);
-            if (idx != SelectedStepIndex)
-            {
-                if (idx >= 0) SelectStep(idx);
-                else DeselectStep();
-            }
+            if (idx == SelectedStepIndex) return;
+
+            // Dragging onto a completed (or missing) card should clear the
+            // stale highlight — SelectStep refuses completed indices, which
+            // would otherwise leave the previous card stuck selected.
+            bool completedTarget = idx >= 0 && completion != null
+                && idx < completion.Length && completion[idx];
+
+            if (idx >= 0 && !completedTarget) SelectStep(idx);
+            else DeselectStep();
         }
     }
 
@@ -151,7 +156,7 @@ public class RecipeManager : MonoBehaviour
 
     public void TryPlaceUtensil(int glyphId, Vector2 screenPos, int contactId = -1)
     {
-        if (CurrentRecipe == null) return;
+        if (!isActive || CurrentRecipe == null || CurrentRecipe.steps == null) return;
 
         if (SelectedStepIndex < 0)
         {

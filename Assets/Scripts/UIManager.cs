@@ -50,24 +50,22 @@ public class UIManager : MonoBehaviour
 
     private void WireButtons()
     {
-        if (titlePlayButton != null)
-            titlePlayButton.onClick.AddListener(() => GameManager.Instance?.ShowDifficultySelect());
+        Wire(titlePlayButton, () => GameManager.Instance?.ShowDifficultySelect());
+        Wire(easyButton, () => GameManager.Instance?.StartGame("easy"));
+        Wire(mediumButton, () => GameManager.Instance?.StartGame("medium"));
+        Wire(hardButton, () => GameManager.Instance?.StartGame("hard"));
+        Wire(difficultyBackButton, () => GameManager.Instance?.ReturnToTitle());
+        Wire(playAnotherButton, () => GameManager.Instance?.PlayAnother());
+        Wire(changeDifficultyButton, () => GameManager.Instance?.ShowDifficultySelect());
+        Wire(quitButton, () => Board.Core.BoardApplication.Exit());
+    }
 
-        if (easyButton != null)
-            easyButton.onClick.AddListener(() => GameManager.Instance?.StartGame("easy"));
-        if (mediumButton != null)
-            mediumButton.onClick.AddListener(() => GameManager.Instance?.StartGame("medium"));
-        if (hardButton != null)
-            hardButton.onClick.AddListener(() => GameManager.Instance?.StartGame("hard"));
-        if (difficultyBackButton != null)
-            difficultyBackButton.onClick.AddListener(() => GameManager.Instance?.ReturnToTitle());
-
-        if (playAnotherButton != null)
-            playAnotherButton.onClick.AddListener(() => GameManager.Instance?.PlayAnother());
-        if (changeDifficultyButton != null)
-            changeDifficultyButton.onClick.AddListener(() => GameManager.Instance?.ShowDifficultySelect());
-        if (quitButton != null)
-            quitButton.onClick.AddListener(() => Board.Core.BoardApplication.Exit());
+    private static void Wire(Button btn, UnityEngine.Events.UnityAction action)
+    {
+        if (btn == null) return;
+        // Clear first so hot-reload / re-enable does not stack duplicate listeners.
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(action);
     }
 
     private void SetOnlyActive(GameObject panel)

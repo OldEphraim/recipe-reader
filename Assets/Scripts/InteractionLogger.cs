@@ -17,6 +17,9 @@ public class InteractionLogger : MonoBehaviour
 
     void Awake()
     {
+        // Singleton check MUST run before OpenFile — otherwise a duplicate
+        // instance opens a second CSV and then self-destructs without
+        // disposing the writer, leaking both the file handle and the log.
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -88,19 +91,24 @@ public class InteractionLogger : MonoBehaviour
         pieceHandler.OnPieceMoved -= HandleMoved;
     }
 
+    private float CurrentRotation(int contactId)
+    {
+        return pieceHandler != null ? pieceHandler.GetOrientationDegrees(contactId) : 0f;
+    }
+
     private void HandlePlaced(int glyphId, Vector2 pos, int contactId)
     {
-        LogEvent("placed", glyphId, PieceIdentifier.GetPieceName(glyphId), contactId, pos, 0f, -1, false, CurrentDifficulty(), CurrentRecipeName());
+        LogEvent("placed", glyphId, PieceIdentifier.GetPieceName(glyphId), contactId, pos, CurrentRotation(contactId), -1, false, CurrentDifficulty(), CurrentRecipeName());
     }
 
     private void HandleLifted(int glyphId, Vector2 pos, int contactId)
     {
-        LogEvent("lifted", glyphId, PieceIdentifier.GetPieceName(glyphId), contactId, pos, 0f, -1, false, CurrentDifficulty(), CurrentRecipeName());
+        LogEvent("lifted", glyphId, PieceIdentifier.GetPieceName(glyphId), contactId, pos, CurrentRotation(contactId), -1, false, CurrentDifficulty(), CurrentRecipeName());
     }
 
     private void HandleMoved(int glyphId, Vector2 pos, int contactId)
     {
-        LogEvent("moved", glyphId, PieceIdentifier.GetPieceName(glyphId), contactId, pos, 0f, -1, false, CurrentDifficulty(), CurrentRecipeName());
+        LogEvent("moved", glyphId, PieceIdentifier.GetPieceName(glyphId), contactId, pos, CurrentRotation(contactId), -1, false, CurrentDifficulty(), CurrentRecipeName());
     }
 
     private static string CurrentDifficulty()

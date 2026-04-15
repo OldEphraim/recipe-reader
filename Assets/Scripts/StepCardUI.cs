@@ -29,8 +29,6 @@ public class StepCardUI : MonoBehaviour
     public bool IsSelected { get; private set; }
 
     private Coroutine wrongFlashRoutine;
-    private Vector2 baseAnchoredPos;
-    private bool baseAnchoredPosCaptured;
 
     void Reset()
     {
@@ -42,17 +40,6 @@ public class StepCardUI : MonoBehaviour
         if (hitArea == null) hitArea = GetComponent<RectTransform>();
         if (checkmark != null) checkmark.enabled = false;
         if (glowBorder != null) glowBorder.enabled = false;
-        CaptureBasePos();
-    }
-
-    private void CaptureBasePos()
-    {
-        var rt = transform as RectTransform;
-        if (rt != null)
-        {
-            baseAnchoredPos = rt.anchoredPosition;
-            baseAnchoredPosCaptured = true;
-        }
     }
 
     public void SetStep(RecipeStep step)
@@ -109,8 +96,11 @@ public class StepCardUI : MonoBehaviour
     {
         if (background == null) yield break;
 
-        if (!baseAnchoredPosCaptured) CaptureBasePos();
+        // Capture the live anchored position at shake-start, not in Awake —
+        // VerticalLayoutGroup writes the real position after Awake, so capturing
+        // earlier would snap the card back to (0,0) when the shake ends.
         var rt = transform as RectTransform;
+        Vector2 baseAnchoredPos = rt != null ? rt.anchoredPosition : Vector2.zero;
 
         background.color = wrongColor;
 
