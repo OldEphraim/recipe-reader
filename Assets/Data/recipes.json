@@ -1,182 +1,284 @@
 {
   "recipes": [
     {
-      "id": "pancakes",
-      "name": "Fluffy Pancakes",
+      "id": "fruit_salad",
+      "name": "Rainbow Fruit Salad",
       "difficulty": "easy",
       "steps": [
         {
           "index": 0,
-          "text": "Crack the eggs into a big bowl.",
-          "verb": "crack",
-          "correctPiece": 2,
-          "displayText": "Crack the eggs into a big bowl.",
-          "completedText": "Crack the eggs into a big bowl."
+          "text": "Slice the bananas into coins.",
+          "verb": "slice",
+          "correctPiece": 3,
+          "displayText": "Slice the bananas into coins.",
+          "completedText": "Slice the bananas into coins."
         },
         {
           "index": 1,
-          "text": "Stir the flour and milk together.",
+          "text": "Stir the yogurt until it's smooth.",
           "verb": "stir",
           "correctPiece": 0,
-          "displayText": "Stir the flour and milk together.",
-          "completedText": "Stir the flour and milk together."
+          "displayText": "Stir the yogurt until it's smooth.",
+          "completedText": "Stir the yogurt until it's smooth."
         },
         {
           "index": 2,
-          "text": "Chop some fresh strawberries.",
-          "verb": "chop",
-          "correctPiece": 3,
-          "displayText": "Chop some fresh strawberries.",
-          "completedText": "Chop some fresh strawberries."
+          "text": "Sprinkle sugar over the berries.",
+          "verb": "sprinkle",
+          "correctPiece": 2,
+          "displayText": "Sprinkle sugar over the berries.",
+          "completedText": "Sprinkle sugar over the berries."
         },
         {
           "index": 3,
-          "text": "Wipe down the countertop before serving.",
-          "verb": "wipe",
+          "text": "Wash the apples under the tap.",
+          "verb": "wash",
           "correctPiece": 1,
-          "displayText": "Wipe down the countertop before serving.",
-          "completedText": "Wipe down the countertop before serving."
+          "displayText": "Wash the apples under the tap.",
+          "completedText": "Wash the apples under the tap."
         }
       ]
     },
     {
-      "id": "pasta_sauce",
-      "name": "Garden Pasta Sauce",
+      "id": "cheesy_toast",
+      "name": "Cheesy Garlic Toast",
       "difficulty": "easy",
       "steps": [
         {
           "index": 0,
-          "text": "Dice the tomatoes into small cubes.",
-          "verb": "dice",
+          "text": "Chop the chives into tiny bits.",
+          "verb": "chop",
           "correctPiece": 3,
-          "displayText": "Dice the tomatoes into small cubes.",
-          "completedText": "Dice the tomatoes into small cubes."
+          "displayText": "Chop the chives into tiny bits.",
+          "completedText": "Chop the chives into tiny bits."
         },
         {
           "index": 1,
-          "text": "Mix the sauce with a big spoon.",
+          "text": "Mix the butter and garlic together.",
           "verb": "mix",
           "correctPiece": 0,
-          "displayText": "Mix the sauce with a big spoon.",
-          "completedText": "Mix the sauce with a big spoon."
+          "displayText": "Mix the butter and garlic together.",
+          "completedText": "Mix the butter and garlic together."
         },
         {
           "index": 2,
-          "text": "Sprinkle some cheese on top.",
-          "verb": "sprinkle",
+          "text": "Grind black pepper over the cheese.",
+          "verb": "grind",
           "correctPiece": 2,
-          "displayText": "Sprinkle some cheese on top.",
-          "completedText": "Sprinkle some cheese on top."
+          "displayText": "Grind black pepper over the cheese.",
+          "completedText": "Grind black pepper over the cheese."
         },
         {
           "index": 3,
-          "text": "Rinse the vegetables under cold water.",
-          "verb": "rinse",
+          "text": "Wipe the crumbs off the cutting board.",
+          "verb": "wipe",
           "correctPiece": 1,
-          "displayText": "Rinse the vegetables under cold water.",
-          "completedText": "Rinse the vegetables under cold water."
+          "displayText": "Wipe the crumbs off the cutting board.",
+          "completedText": "Wipe the crumbs off the cutting board."
         }
       ]
     },
     {
-      "id": "stir_fry",
-      "name": "Veggie Stir Fry",
+      "id": "veggie_tacos",
+      "name": "Crunchy Veggie Tacos",
       "difficulty": "medium",
       "steps": [
         {
           "index": 0,
-          "text": "Julienne the carrots into thin matchstick strips.",
-          "verb": "julienne",
+          "text": "Dice the red onion into small squares.",
+          "verb": "dice",
           "correctPiece": 3,
-          "displayText": "Julienne the carrots into thin matchstick strips.",
-          "completedText": "Julienne the carrots into thin matchstick strips."
+          "displayText": "Dice the red onion into small squares.",
+          "completedText": "Dice the red onion into small squares."
         },
         {
           "index": 1,
-          "text": "Fold the egg mixture gently into the vegetables.",
-          "verb": "fold",
+          "text": "Scoop the black beans into a warm pan.",
+          "verb": "scoop",
           "correctPiece": 0,
-          "displayText": "Fold the egg mixture gently into the vegetables.",
-          "completedText": "Fold the egg mixture gently into the vegetables."
+          "displayText": "Scoop the black beans into a warm pan.",
+          "completedText": "Scoop the black beans into a warm pan."
         },
         {
           "index": 2,
-          "text": "Zest a lime over the finished dish for brightness.",
-          "verb": "zest",
+          "text": "Season the filling with a pinch of cumin.",
+          "verb": "season",
           "correctPiece": 2,
-          "displayText": "Zest a lime over the finished dish for brightness.",
-          "completedText": "Zest a lime over the finished dish for brightness."
+          "displayText": "Season the filling with a pinch of cumin.",
+          "completedText": "Season the filling with a pinch of cumin."
         },
         {
           "index": 3,
-          "text": "Scrub the cutting board clean between ingredients.",
-          "verb": "scrub",
+          "text": "Rinse the lettuce leaves under cool water.",
+          "verb": "rinse",
           "correctPiece": 1,
-          "displayText": "Scrub the cutting board clean between ingredients.",
-          "completedText": "Scrub the cutting board clean between ingredients."
+          "displayText": "Rinse the lettuce leaves under cool water.",
+          "completedText": "Rinse the lettuce leaves under cool water."
         },
         {
           "index": 4,
-          "text": "Ladle the hot sauce into a serving bowl.",
-          "verb": "ladle",
-          "correctPiece": 0,
-          "displayText": "Ladle the hot sauce into a serving bowl.",
-          "completedText": "Ladle the hot sauce into a serving bowl."
+          "text": "Slice the ripe avocado into thin wedges.",
+          "verb": "slice",
+          "correctPiece": 3,
+          "displayText": "Slice the ripe avocado into thin wedges.",
+          "completedText": "Slice the ripe avocado into thin wedges."
         }
       ]
     },
     {
-      "id": "soup",
-      "name": "Mystery Soup",
+      "id": "smoothie_bowl",
+      "name": "Sunrise Smoothie Bowl",
+      "difficulty": "medium",
+      "steps": [
+        {
+          "index": 0,
+          "text": "Scrub the strawberries to get them squeaky clean.",
+          "verb": "scrub",
+          "correctPiece": 1,
+          "displayText": "Scrub the strawberries to get them squeaky clean.",
+          "completedText": "Scrub the strawberries to get them squeaky clean."
+        },
+        {
+          "index": 1,
+          "text": "Chop the frozen mango into big chunks.",
+          "verb": "chop",
+          "correctPiece": 3,
+          "displayText": "Chop the frozen mango into big chunks.",
+          "completedText": "Chop the frozen mango into big chunks."
+        },
+        {
+          "index": 2,
+          "text": "Fold the granola gently into the yogurt.",
+          "verb": "fold",
+          "correctPiece": 0,
+          "displayText": "Fold the granola gently into the yogurt.",
+          "completedText": "Fold the granola gently into the yogurt."
+        },
+        {
+          "index": 3,
+          "text": "Crush a handful of almonds for the topping.",
+          "verb": "crush",
+          "correctPiece": 2,
+          "displayText": "Crush a handful of almonds for the topping.",
+          "completedText": "Crush a handful of almonds for the topping."
+        },
+        {
+          "index": 4,
+          "text": "Mix the honey into the smoothie base.",
+          "verb": "mix",
+          "correctPiece": 0,
+          "displayText": "Mix the honey into the smoothie base.",
+          "completedText": "Mix the honey into the smoothie base."
+        }
+      ]
+    },
+    {
+      "id": "mystery_stew",
+      "name": "Mystery Winter Stew",
       "difficulty": "hard",
       "steps": [
         {
           "index": 0,
-          "text": "_____ the onion until you have tiny, even pieces.",
-          "verb": "mince",
+          "text": "_____ the carrots into thick coins.",
+          "verb": "slice",
           "correctPiece": 3,
-          "displayText": "_____ the onion until you have tiny, even pieces.",
-          "completedText": "Mince the onion until you have tiny, even pieces."
+          "displayText": "_____ the carrots into thick coins.",
+          "completedText": "Slice the carrots into thick coins."
         },
         {
           "index": 1,
-          "text": "_____ the pot slowly so nothing sticks to the bottom.",
+          "text": "_____ the broth while it simmers on the stove.",
           "verb": "stir",
           "correctPiece": 0,
-          "displayText": "_____ the pot slowly so nothing sticks to the bottom.",
-          "completedText": "Stir the pot slowly so nothing sticks to the bottom."
+          "displayText": "_____ the broth while it simmers on the stove.",
+          "completedText": "Stir the broth while it simmers on the stove."
         },
         {
           "index": 2,
-          "text": "_____ the peppercorns until they are a fine powder.",
-          "verb": "grind",
+          "text": "_____ a pinch of rosemary over the top.",
+          "verb": "sprinkle",
           "correctPiece": 2,
-          "displayText": "_____ the peppercorns until they are a fine powder.",
-          "completedText": "Grind the peppercorns until they are a fine powder."
+          "displayText": "_____ a pinch of rosemary over the top.",
+          "completedText": "Sprinkle a pinch of rosemary over the top."
         },
         {
           "index": 3,
-          "text": "_____ the celery stalks under running water before using them.",
-          "verb": "wash",
+          "text": "_____ the mushrooms under cool running water.",
+          "verb": "rinse",
           "correctPiece": 1,
-          "displayText": "_____ the celery stalks under running water before using them.",
-          "completedText": "Wash the celery stalks under running water before using them."
+          "displayText": "_____ the mushrooms under cool running water.",
+          "completedText": "Rinse the mushrooms under cool running water."
         },
         {
           "index": 4,
-          "text": "_____ the potatoes into quarters before adding to the pot.",
-          "verb": "quarter",
+          "text": "_____ the garlic cloves into tiny, even pieces.",
+          "verb": "mince",
           "correctPiece": 3,
-          "displayText": "_____ the potatoes into quarters before adding to the pot.",
-          "completedText": "Quarter the potatoes into quarters before adding to the pot."
+          "displayText": "_____ the garlic cloves into tiny, even pieces.",
+          "completedText": "Mince the garlic cloves into tiny, even pieces."
         },
         {
           "index": 5,
-          "text": "_____ everything together one final time before serving.",
-          "verb": "blend",
+          "text": "_____ the dumplings into the pot one at a time.",
+          "verb": "scoop",
           "correctPiece": 0,
-          "displayText": "_____ everything together one final time before serving.",
-          "completedText": "Blend everything together one final time before serving."
+          "displayText": "_____ the dumplings into the pot one at a time.",
+          "completedText": "Scoop the dumplings into the pot one at a time."
+        }
+      ]
+    },
+    {
+      "id": "garden_salad",
+      "name": "Secret Garden Salad",
+      "difficulty": "hard",
+      "steps": [
+        {
+          "index": 0,
+          "text": "_____ the cucumber into round slices.",
+          "verb": "cut",
+          "correctPiece": 3,
+          "displayText": "_____ the cucumber into round slices.",
+          "completedText": "Cut the cucumber into round slices."
+        },
+        {
+          "index": 1,
+          "text": "_____ the dressing until it looks creamy.",
+          "verb": "mix",
+          "correctPiece": 0,
+          "displayText": "_____ the dressing until it looks creamy.",
+          "completedText": "Mix the dressing until it looks creamy."
+        },
+        {
+          "index": 2,
+          "text": "_____ the peppercorns for a fresh kick.",
+          "verb": "grind",
+          "correctPiece": 2,
+          "displayText": "_____ the peppercorns for a fresh kick.",
+          "completedText": "Grind the peppercorns for a fresh kick."
+        },
+        {
+          "index": 3,
+          "text": "_____ the lettuce leaves to get rid of grit.",
+          "verb": "wash",
+          "correctPiece": 1,
+          "displayText": "_____ the lettuce leaves to get rid of grit.",
+          "completedText": "Wash the lettuce leaves to get rid of grit."
+        },
+        {
+          "index": 4,
+          "text": "_____ the tomatoes into bite-sized cubes.",
+          "verb": "dice",
+          "correctPiece": 3,
+          "displayText": "_____ the tomatoes into bite-sized cubes.",
+          "completedText": "Dice the tomatoes into bite-sized cubes."
+        },
+        {
+          "index": 5,
+          "text": "_____ the croutons gently into the bowl last.",
+          "verb": "fold",
+          "correctPiece": 0,
+          "displayText": "_____ the croutons gently into the bowl last.",
+          "completedText": "Fold the croutons gently into the bowl last."
         }
       ]
     }

@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text recipeNameText;
     public TMP_Text difficultyBadgeText;
     public TMP_Text scoreText;
+    public TMP_Text littleChefPromptText;
     public RectTransform stepCardContainer;
     public StepCardUI stepCardPrefab;
     public Canvas gameplayCanvas;
@@ -90,6 +91,24 @@ public class UIManager : MonoBehaviour
 
         BuildStepCards(recipe);
         UpdateScore(0, 0);
+        ShowLittleChefPrompt();
+    }
+
+    public void ShowLittleChefPrompt()
+    {
+        if (littleChefPromptText != null)
+        {
+            littleChefPromptText.text = "Place the Little Chef on a step to begin!";
+            littleChefPromptText.gameObject.SetActive(true);
+        }
+    }
+
+    public void HideLittleChefPrompt()
+    {
+        if (littleChefPromptText != null)
+        {
+            littleChefPromptText.gameObject.SetActive(false);
+        }
     }
 
     private void BuildStepCards(Recipe recipe)

@@ -16,7 +16,12 @@ public class StepCardUI : MonoBehaviour
     public Color defaultColor = new Color(1f, 0.98f, 0.92f);
     public Color selectedColor = new Color(1f, 0.95f, 0.6f);
     public Color completedColor = new Color(0.7f, 1f, 0.7f);
-    public Color wrongColor = new Color(1f, 0.6f, 0.6f);
+    public Color wrongColor = new Color(1f, 0.15f, 0.15f);
+
+    [Header("Wrong Feedback")]
+    public float wrongFlashDuration = 1.0f;
+    public int wrongShakeCount = 3;
+    public float wrongShakeAmplitude = 30f;
 
     public int StepIndex { get; private set; }
     public RecipeStep Step { get; private set; }
@@ -24,6 +29,8 @@ public class StepCardUI : MonoBehaviour
     public bool IsSelected { get; private set; }
 
     private Coroutine wrongFlashRoutine;
+    private Vector2 baseAnchoredPos;
+    private bool baseAnchoredPosCaptured;
 
     void Reset()
     {
@@ -35,6 +42,17 @@ public class StepCardUI : MonoBehaviour
         if (hitArea == null) hitArea = GetComponent<RectTransform>();
         if (checkmark != null) checkmark.enabled = false;
         if (glowBorder != null) glowBorder.enabled = false;
+        CaptureBasePos();
+    }
+
+    private void CaptureBasePos()
+    {
+        var rt = transform as RectTransform;
+        if (rt != null)
+        {
+            baseAnchoredPos = rt.anchoredPosition;
+            baseAnchoredPosCaptured = true;
+        }
     }
 
     public void SetStep(RecipeStep step)
@@ -82,6 +100,7 @@ public class StepCardUI : MonoBehaviour
 
     public void FlashWrong()
     {
+        Debug.Log($"[StepCardUI] FlashWrong fired on step {StepIndex} ({(Step != null ? Step.verb : "?")})");
         if (wrongFlashRoutine != null) StopCoroutine(wrongFlashRoutine);
         wrongFlashRoutine = StartCoroutine(WrongFlash());
     }
@@ -89,9 +108,32 @@ public class StepCardUI : MonoBehaviour
     private IEnumerator WrongFlash()
     {
         if (background == null) yield break;
-        Color start = background.color;
+
+        if (!baseAnchoredPosCaptured) CaptureBasePos();
+        var rt = transform as RectTransform;
+
         background.color = wrongColor;
-        yield return new WaitForSeconds(0.5f);
+
+        float totalDuration = Mathf.Max(0.1f, wrongFlashDuration);
+        float shakeDuration = Mathf.Min(0.6f, totalDuration);
+        float elapsed = 0f;
+        float shakesPerSecond = wrongShakeCount / shakeDuration;
+
+        while (elapsed < shakeDuration && rt != null)
+        {
+            elapsed += Time.deltaTime;
+            float phase = elapsed * shakesPerSecond * Mathf.PI * 2f;
+            float falloff = 1f - (elapsed / shakeDuration);
+            float offset = Mathf.Sin(phase) * wrongShakeAmplitude * falloff;
+            rt.anchoredPosition = baseAnchoredPos + new Vector2(offset, 0f);
+            yield return null;
+        }
+
+        if (rt != null) rt.anchoredPosition = baseAnchoredPos;
+
+        float remaining = totalDuration - shakeDuration;
+        if (remaining > 0f) yield return new WaitForSeconds(remaining);
+
         background.color = IsCompleted ? completedColor : (IsSelected ? selectedColor : defaultColor);
         wrongFlashRoutine = null;
     }

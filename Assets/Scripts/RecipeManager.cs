@@ -18,6 +18,7 @@ public class RecipeManager : MonoBehaviour
     private bool[] completion;
     private bool isActive;
     private int littleChefContactId = -1;
+    private bool firstSelectionMade;
 
     void OnEnable()
     {
@@ -55,8 +56,13 @@ public class RecipeManager : MonoBehaviour
         littleChefContactId = -1;
         completion = new bool[TotalSteps];
         isActive = true;
+        firstSelectionMade = false;
 
-        if (uiManager != null) uiManager.UpdateScore(0, 0);
+        if (uiManager != null)
+        {
+            uiManager.UpdateScore(0, 0);
+            uiManager.ShowLittleChefPrompt();
+        }
     }
 
     public void EndRecipe()
@@ -124,6 +130,11 @@ public class RecipeManager : MonoBehaviour
         {
             var card = uiManager.GetCardForStepIndex(stepIndex);
             if (card != null) card.SetSelected(true);
+            if (!firstSelectionMade)
+            {
+                firstSelectionMade = true;
+                uiManager.HideLittleChefPrompt();
+            }
         }
     }
 
