@@ -71,3 +71,15 @@ When the Little Chef dragged from step A into an already-completed step B, the o
 - `RecipeManager.AutoAdvanceSelection` highlights a step the physical Little Chef is not on. Documented as intentional "next-up hint" in the README's Known Issues.
 - `RecipeData` uses `JsonUtility`, which silently ignores unknown fields and gives no error on malformed JSON. Swapping for a stricter parser would mean a new dependency for a prototype — not justified.
 
+## 2026-04-28 — Hard-difficulty step cards overflowing into the recipe banner
+**Symptom.** On hard recipes (6 steps), the step-card stack grew taller than the area between the recipe banner and the bottom piece-reminder bar. The container has a `ContentSizeFitter` set to `PreferredSize` (vertical), so it expanded to fit content and pushed up across the banner. Math: 6 × 140 (card) + 5 × 20 (spacing) + 40 (padding) = 980px, against ~820px of available space.
+
+**Decision.** Picked option 4 (reduce per-card height) over the alternatives:
+- *Font size only* would not have helped — the bottleneck is card height, which is set by `RectTransform.sizeDelta`, independent of text.
+- *ScrollRect* would have hidden steps off-screen, which breaks the game's premise (both players must read all steps at a glance) and would also require routing finger touches through the scroll viewport.
+- *Reducing spacing/padding only* did not buy enough — the math above shows we are 160px over budget at 6 steps; trimming spacing to zero only saves 100px.
+
+**Implementation.** `UIManager.BuildStepCards` now scales the card height (`RectTransform.sizeDelta.y` and `LayoutElement.preferredHeight`, since the layout group has `childControlHeight = false`) and the display font size to fit the step count: ≤4 steps → 140px / 42pt (unchanged); 5 → 122px / 36pt; 6 → 110px / 32pt. Lower bound 90px so very long recipes degrade gracefully rather than crash visually. Container budget constants (820 / 40 / 20) mirror the values in `RecipeReaderSceneBuilder.CreateGameplayPanel` and are commented as such so they stay in sync if the panel layout is ever rebuilt.
+
+**Why runtime-only and not a scene-builder fix.** The instruction was to leave `.unity` scene files alone. Adjusting the prefab's static `LayoutElement` would have required a re-bake; doing the resize at card-instantiation time is self-contained, has no migration cost, and adapts to any step count rather than baking in a "hard mode" magic number.
+

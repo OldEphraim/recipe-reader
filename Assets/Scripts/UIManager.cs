@@ -119,11 +119,67 @@ public class UIManager : MonoBehaviour
 
         if (stepCardContainer == null || stepCardPrefab == null || recipe.steps == null) return;
 
+        int stepCount = recipe.steps.Count;
+        float cardHeight = ComputeCardHeight(stepCount);
+        float cardFontSize = ComputeCardFontSize(stepCount);
+
         foreach (var step in recipe.steps)
         {
             var card = Instantiate(stepCardPrefab, stepCardContainer);
             card.SetStep(step);
+            ApplyCardSize(card, cardHeight, cardFontSize);
             activeStepCards.Add(card);
+        }
+    }
+
+    // Container budget matches RecipeReaderSceneBuilder.CreateGameplayPanel:
+    // anchored stretch with offsetMin.y = 120 and offsetMax.y = -140 against a
+    // 1080-tall canvas leaves ~820px between the recipe banner and the piece
+    // reminder bar. VerticalLayoutGroup uses 20px top/bottom padding and 20px
+    // spacing between cards. We size cards to fit so the container's
+    // ContentSizeFitter never pushes up into the banner.
+    private const float ContainerAvailableHeight = 820f;
+    private const float ContainerVerticalPadding = 40f;
+    private const float ContainerSpacing = 20f;
+    private const float MaxCardHeight = 140f;
+    private const float MinCardHeight = 90f;
+
+    private static float ComputeCardHeight(int stepCount)
+    {
+        if (stepCount <= 0) return MaxCardHeight;
+        float budget = (ContainerAvailableHeight - ContainerVerticalPadding
+            - ContainerSpacing * (stepCount - 1)) / stepCount;
+        return Mathf.Clamp(budget, MinCardHeight, MaxCardHeight);
+    }
+
+    private static float ComputeCardFontSize(int stepCount)
+    {
+        if (stepCount <= 4) return 42f;
+        if (stepCount == 5) return 36f;
+        return 32f;
+    }
+
+    private static void ApplyCardSize(StepCardUI card, float height, float fontSize)
+    {
+        if (card == null) return;
+
+        if (card.transform is RectTransform rt)
+        {
+            var size = rt.sizeDelta;
+            size.y = height;
+            rt.sizeDelta = size;
+        }
+
+        var layoutElement = card.GetComponent<LayoutElement>();
+        if (layoutElement != null)
+        {
+            layoutElement.preferredHeight = height;
+            if (layoutElement.minHeight > height) layoutElement.minHeight = height;
+        }
+
+        if (card.displayText != null)
+        {
+            card.displayText.fontSize = fontSize;
         }
     }
 
